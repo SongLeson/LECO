@@ -2,6 +2,7 @@
   "name": "leco-sports-website",
   "version": "1.0.0",
   "description": "LECO Sports Brand Official Website - Move Beyond Limits",
+  "homepage": "https://YOUR_GITHUB_USERNAME.github.io/LECO",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

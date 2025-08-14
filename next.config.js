@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const path = require('path')
 
+// 检测是否为GitHub Pages部署
+const isGithubPages = process.env.GITHUB_PAGES === 'true' || process.env.GITHUB_ACTIONS === 'true'
+const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/')[1] : 'LECO'
+
 const nextConfig = {
   // 输出配置
   output: 'export',
@@ -10,8 +14,8 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
 
   // GitHub Pages 配置
-  basePath: process.env.NODE_ENV === 'production' ? '' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  basePath: isGithubPages ? `/${repoName}` : '',
+  assetPrefix: isGithubPages ? `/${repoName}` : '',
 
   // 图片优化配置
   images: {
