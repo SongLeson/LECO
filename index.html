@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>LECO - Move Beyond Limits | 释放潜能，突破极限</title>
+    <meta name="description" content="LECO 运动品牌官网 - 发现革命性的运动装备，突破极限，释放潜能。专业运动鞋、服装、配件，为冠军而设计。">
+    <meta name="keywords" content="LECO, 运动品牌, 运动鞋, 运动服装, 体育用品, 健身装备, 跑步鞋, 篮球鞋">
+    <meta name="author" content="LECO Sports">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://leco.com/">
+    <meta property="og:title" content="LECO - Move Beyond Limits">
+    <meta property="og:description" content="发现革命性的运动装备，突破极限，释放潜能。专业运动鞋、服装、配件，为冠军而设计。">
+    <meta property="og:image" content="https://leco.com/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="LECO">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://leco.com/">
+    <meta property="twitter:title" content="LECO - Move Beyond Limits">
+    <meta property="twitter:description" content="发现革命性的运动装备，突破极限，释放潜能。专业运动鞋、服装、配件，为冠军而设计。">
+    <meta property="twitter:image" content="https://leco.com/images/og-image.jpg">
+    <meta property="twitter:site" content="@leco">
+    <meta property="twitter:creator" content="@leco">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#00E5FF">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/videos/hero-bg.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="/images/hero-bg.jpg" as="image" type="image/jpeg">
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//api.leco.com">
+    <link rel="dns-prefetch" href="//cdn.leco.com">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "LECO",
+        "alternateName": "LECO Sports",
+        "url": "https://leco.com",
+        "logo": "https://leco.com/images/logo.png",
+        "description": "LECO 是一个专业的运动品牌，致力于为运动员和健身爱好者提供高品质的运动装备。",
+        "foundingDate": "2020",
+        "slogan": "Move Beyond Limits - 释放潜能，突破极限",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+86-400-123-4567",
+            "contactType": "customer service",
+            "availableLanguage": ["Chinese", "English"]
+        },
+        "sameAs": [
+            "https://www.instagram.com/leco",
+            "https://www.tiktok.com/@leco",
+            "https://www.youtube.com/leco",
+            "https://www.facebook.com/leco"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "CN",
+            "addressRegion": "上海市",
+            "addressLocality": "浦东新区",
+            "streetAddress": "张江高科技园区"
+        }
+    }
+    </script>
+    
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        /* Critical CSS for initial page load */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 50%, #0F0F0F 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-logo {
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00E5FF;
+            text-shadow: 0 0 20px #00E5FF;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero-title {
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #00E5FF 0%, #8B00FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-bottom: 2rem;
+            color: #E0E0E0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #00E5FF 0%, #8B00FF 100%);
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.5);
+        }
+        
+        /* Hide content until Next.js loads */
+        #__next {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        
+        #__next.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-logo">LECO</div>
+    </div>
+    
+    <!-- Fallback content for when JavaScript is disabled -->
+    <noscript>
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 10000;">
+            <h1 style="font-family: 'Orbitron', Arial, sans-serif; font-size: 3rem; color: #00E5FF; margin-bottom: 1rem;">LECO</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Move Beyond Limits</p>
+            <p>请启用 JavaScript 以获得最佳体验</p>
+        </div>
+    </noscript>
+    
+    <!-- Static fallback hero section -->
+    <div id="static-hero" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">LECO</h1>
+            <h2 class="hero-subtitle">MOVE BEYOND LIMITS</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #E0E0E0;">释放潜能，突破极限</p>
+            <a href="/products" class="cta-button">立即购买</a>
+        </div>
+    </div>
+    
+    <!-- Next.js App Root -->
+    <div id="__next"></div>
+    
+    <!-- Critical JavaScript -->
+    <script>
+        // Performance monitoring
+        if ('performance' in window && 'mark' in performance) {
+            performance.mark('page-start');
+        }
+        
+        // Hide loading screen when Next.js loads
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const staticHero = document.getElementById('static-hero');
+            const nextRoot = document.getElementById('__next');
+            
+            if (loadingScreen) {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+            
+            if (staticHero) {
+                staticHero.style.display = 'none';
+            }
+            
+            if (nextRoot) {
+                nextRoot.classList.add('loaded');
+            }
+            
+            if ('performance' in window && 'mark' in performance) {
+                performance.mark('page-interactive');
+            }
+        }
+        
+        // Wait for Next.js to load
+        if (typeof window !== 'undefined') {
+            window.addEventListener('load', () => {
+                // Give Next.js a moment to hydrate
+                setTimeout(hideLoadingScreen, 1000);
+            });
+            
+            // Fallback timeout
+            setTimeout(hideLoadingScreen, 5000);
+        }
+        
+        // Preload critical resources
+        function preloadResources() {
+            const resources = [
+                { href: '/videos/hero-bg.mp4', as: 'video' },
+                { href: '/images/hero-bg.jpg', as: 'image' },
+                { href: '/images/logo.png', as: 'image' }
+            ];
+            
+            resources.forEach(resource => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.href = resource.href;
+                link.as = resource.as;
+                document.head.appendChild(link);
+            });
+        }
+        
+        // Initialize preloading
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', preloadResources);
+        } else {
+            preloadResources();
+        }
+        
+        // Service Worker registration (for PWA)
+        if ('serviceWorker' in navigator && 'production' === 'production') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
+        // Basic analytics (replace with your analytics code)
+        function trackPageView() {
+            if (typeof gtag !== 'undefined') {
+                gtag('config', 'GA_MEASUREMENT_ID', {
+                    page_title: document.title,
+                    page_location: window.location.href
+                });
+            }
+        }
+        
+        // Track page view when loaded
+        window.addEventListener('load', trackPageView);
+    </script>
+    
+    <!-- Google Analytics (replace GA_MEASUREMENT_ID with your actual ID) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+</body>
+</html>
