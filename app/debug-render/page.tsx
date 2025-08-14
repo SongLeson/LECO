@@ -106,7 +106,7 @@ export default function DebugRenderPage() {
           {/* 错误模拟测试 */}
           <div className="bg-red-900/20 border border-red-500 p-6 rounded-lg">
             <h2 className="text-xl font-semibold mb-4 text-red-300">错误模拟测试</h2>
-            <p className="text-red-200">以下代码会导致 "Objects are not valid as a React child" 错误：</p>
+            <p className="text-red-200">以下代码会导致 &quot;Objects are not valid as a React child&quot; 错误：</p>
             <code className="block mt-2 p-2 bg-black rounded text-red-300">
               {`<p>{testData.category}</p> // ❌ 直接渲染对象`}
             </code>

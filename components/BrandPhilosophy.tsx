@@ -92,7 +92,7 @@ const BrandPhilosophy = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We don't just make sports gear. We craft the tools that transform 
+            We don&apos;t just make sports gear. We craft the tools that transform
             athletes into legends, moments into memories, and dreams into reality.
           </motion.p>
         </motion.div>
@@ -100,11 +100,6 @@ const BrandPhilosophy = () => {
         {/* Philosophy Cards */}
         <div className="space-y-32">
           {philosophies.map((philosophy, index) => {
-            const y = useTransform(
-              scrollYProgress,
-              [index * 0.2, (index + 1) * 0.2],
-              [100, -100]
-            )
 
             return (
               <motion.div
@@ -115,7 +110,6 @@ const BrandPhilosophy = () => {
                 initial={{ opacity: 0, y: 100 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 + index * 0.3 }}
-                style={{ y }}
               >
                 {/* Content Side */}
                 <div className="flex-1 space-y-6">

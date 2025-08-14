@@ -99,7 +99,7 @@ const PerformanceMonitor = () => {
       clsObserver.disconnect()
       window.removeEventListener('beforeunload', sendMetrics)
     }
-  }, [])
+  }, [metrics])
 
   // 开发环境下显示性能指标
   if (process.env.NODE_ENV !== 'development') {

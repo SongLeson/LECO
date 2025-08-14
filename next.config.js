@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
+
 const nextConfig = {
   // 输出配置
   output: 'export',
@@ -10,7 +12,7 @@ const nextConfig = {
   // GitHub Pages 配置
   basePath: process.env.NODE_ENV === 'production' ? '' : '',
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  
+
   // 图片优化配置
   images: {
     unoptimized: true, // GitHub Pages 不支持 Next.js 图片优化
@@ -26,10 +28,10 @@ const nextConfig = {
 
   // 压缩配置
   compress: true,
-  
+
   // 性能优化
   swcMinify: true,
-  
+
   // 实验性功能
   experimental: {
     optimizeCss: true,
@@ -41,73 +43,11 @@ const nextConfig = {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
 
-  // 重定向配置
-  async redirects() {
-    return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
-    ]
-  },
-
-  // 头部配置
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
-        ],
-      },
-      {
-        source: '/images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).css',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).js',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ]
-  },
+  // 注意：redirects 和 headers 在静态导出中不起作用
+  // 如果需要这些功能，请在服务器或CDN级别配置
 
   // Webpack 配置
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config) => {
     // 优化包大小
     config.optimization.splitChunks = {
       chunks: 'all',
@@ -129,7 +69,7 @@ const nextConfig = {
     // 添加别名
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': require('path').resolve(__dirname),
+      '@': path.resolve(__dirname),
     }
 
     return config

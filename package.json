@@ -11,6 +11,7 @@
     "deploy": "npm run export && gh-pages -d out",
     "deploy:github": "npm run build && node scripts/deploy-github-pages.js",
     "test:build": "node scripts/test-build.js",
+    "test:quick": "node scripts/quick-build-test.js",
     "type-check": "tsc --noEmit",
     "analyze": "ANALYZE=true npm run build",
     "clean": "rm -rf .next out",
