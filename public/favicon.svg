@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆形 -->
+  <circle cx="256" cy="256" r="240" fill="url(#gradient)" stroke="#FFFFFF" stroke-width="8"/>
+  
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF6B00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B00FF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- LECO 字母 L -->
+  <path d="M120 120 L120 360 L280 360 L280 320 L160 320 L160 120 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  
+  <!-- 装饰性运动元素 -->
+  <circle cx="350" cy="180" r="20" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="380" cy="220" r="15" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="320" cy="240" r="12" fill="#FFFFFF" opacity="0.4"/>
+  
+  <!-- 动感线条 -->
+  <path d="M300 300 Q350 280 400 300 Q380 320 340 310 Q320 300 300 300" fill="#FFFFFF" opacity="0.7"/>
+</svg>

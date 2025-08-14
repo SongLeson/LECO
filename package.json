@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build",
+    "deploy": "npm run export && gh-pages -d out",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true npm run build",
+    "clean": "rm -rf .next out",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "@react-three/drei": "^9.88.0",

@@ -6,8 +6,13 @@ import HeroSection from '@/components/HeroSection'
 import ProductShowcase from '@/components/ProductShowcase'
 import BrandPhilosophy from '@/components/BrandPhilosophy'
 import SportsCinema from '@/components/SportsCinema'
+import EventsSection from '@/components/EventsSection'
+import NewsSection from '@/components/NewsSection'
+import SubscribeSection from '@/components/SubscribeSection'
 import SocialHub from '@/components/SocialHub'
 import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
+import { OrganizationStructuredData, WebsiteStructuredData } from '@/components/StructuredData'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import CustomCursor from '@/components/CustomCursor'
 import ErrorBoundary from '@/components/ErrorBoundary'
@@ -48,15 +53,21 @@ export default function Home() {
     <ErrorBoundary>
       <LoadingAnimation />
       <CustomCursor />
+      <OrganizationStructuredData />
+      <WebsiteStructuredData />
       <main className="min-h-screen bg-leco-black">
         <Navigation />
         <HeroSection />
         <ProductShowcase />
         <BrandPhilosophy />
         <SportsCinema />
+        <EventsSection />
+        <NewsSection />
+        <SubscribeSection />
         <SocialHub />
         <Footer />
       </main>
+      <ScrollToTop />
     </ErrorBoundary>
   )
 }

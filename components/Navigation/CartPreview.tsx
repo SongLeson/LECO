@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { CartPreviewProps } from '@/types/components'
 import { formatPrice } from '@/utils/format'
+import { getVariantInfo } from '@/utils/safeRender'
 import useCart from '@/hooks/useCart'
 
 const CartPreview: React.FC<CartPreviewProps> = ({
@@ -130,7 +131,7 @@ const CartPreview: React.FC<CartPreviewProps> = ({
                     
                     {item.variant && (
                       <p className="text-sm text-leco-silver">
-                        {item.variant.name}: {item.variant.value}
+                        {getVariantInfo(item.variant)}
                       </p>
                     )}
 

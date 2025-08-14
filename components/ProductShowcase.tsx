@@ -1,8 +1,12 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart, Star } from 'lucide-react'
+import useCart from '@/hooks/useCart'
+import { getCategoryName } from '@/utils/safeRender'
+// import useProducts from '@/hooks/useProducts'
+// import { formatPrice } from '@/utils/format'
 
 interface Product {
   id: number
@@ -18,9 +22,13 @@ interface Product {
 const ProductShowcase = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
-  
+
   const [activeCategory, setActiveCategory] = useState('all')
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [favorites, setFavorites] = useState<Set<string>>(new Set())
+
+  const { addToCart, isInCart, getItemQuantity } = useCart()
+  // const { data: productsData, loading, error } = useProducts({ tag: 'hot', limit: 12 })
 
   const categories = [
     { id: 'all', name: 'ALL PRODUCTS' },
@@ -29,7 +37,41 @@ const ProductShowcase = () => {
     { id: 'accessories', name: 'ACCESSORIES' },
   ]
 
-  const products: Product[] = [
+  // 处理添加到购物车
+  const handleAddToCart = async (product: any) => {
+    try {
+      await addToCart({
+        productId: product.id,
+        quantity: 1,
+        variantId: product.variants?.[0]?.id, // 默认选择第一个变体
+      })
+      console.log('商品已添加到购物车:', product.name)
+    } catch (error) {
+      console.error('添加到购物车失败:', error)
+    }
+  }
+
+  // 处理收藏
+  const handleToggleFavorite = (productId: string) => {
+    const newFavorites = new Set(favorites)
+    if (newFavorites.has(productId)) {
+      newFavorites.delete(productId)
+    } else {
+      newFavorites.add(productId)
+    }
+    setFavorites(newFavorites)
+    console.log('收藏状态已更新:', productId)
+  }
+
+  // 处理查看详情
+  const handleViewProduct = (productId: string) => {
+    window.location.href = `/products/${productId}`
+  }
+
+
+
+  // 静态产品数据作为fallback
+  const mockProducts: Product[] = [
     {
       id: 1,
       name: 'VELOCITY PRO X1',
@@ -48,53 +90,55 @@ const ProductShowcase = () => {
       image: '/images/products/shoe-2.jpg',
       colors: ['#FFFFFF', '#39FF14', '#8B00FF'],
       isNew: false,
-      rating: 4.8
-    },
-    {
-      id: 3,
-      name: 'PERFORMANCE TEE',
-      category: 'apparel',
-      price: 89,
-      image: '/images/products/tee-1.jpg',
-      colors: ['#000000', '#FFFFFF', '#00D4FF'],
-      isNew: true,
       rating: 4.7
     },
     {
-      id: 4,
-      name: 'POWER SHORTS',
+      id: 3,
+      name: 'POWER JACKET PRO',
       category: 'apparel',
+      price: 199,
+      image: '/images/products/jacket-1.jpg',
+      colors: ['#000000', '#00D4FF', '#8B00FF'],
+      isNew: true,
+      rating: 4.8
+    },
+    {
+      id: 4,
+      name: 'ELITE BACKPACK',
+      category: 'accessories',
       price: 129,
-      image: '/images/products/shorts-1.jpg',
-      colors: ['#000000', '#FF6B00'],
+      image: '/images/products/backpack-1.jpg',
+      colors: ['#000000', '#1A1A1A', '#FF6B00'],
       isNew: false,
       rating: 4.6
     },
     {
       id: 5,
-      name: 'SMART WATCH X',
-      category: 'accessories',
-      price: 499,
-      image: '/images/products/watch-1.jpg',
-      colors: ['#000000', '#E0E0E0'],
-      isNew: true,
-      rating: 4.9
-    },
-    {
-      id: 6,
-      name: 'HYDRO BOTTLE',
-      category: 'accessories',
-      price: 59,
-      image: '/images/products/bottle-1.jpg',
-      colors: ['#00D4FF', '#39FF14', '#FF6B00'],
+      name: 'TRAINING SHORTS',
+      category: 'apparel',
+      price: 89,
+      image: '/images/products/shorts-1.jpg',
+      colors: ['#000000', '#00D4FF', '#39FF14'],
       isNew: false,
       rating: 4.5
     },
+    {
+      id: 6,
+      name: 'SMART WATCH',
+      category: 'accessories',
+      price: 399,
+      image: '/images/products/watch-1.jpg',
+      colors: ['#000000', '#E0E0E0', '#00D4FF'],
+      isNew: true,
+      rating: 4.9
+    },
   ]
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
-    : products.filter(product => product.category === activeCategory)
+  // 暂时直接使用静态数据
+  const allProducts = mockProducts
+  const filteredProducts = activeCategory === 'all'
+    ? allProducts
+    : allProducts.filter((product: any) => product.category === activeCategory)
 
   const nextSlide = () => {
     setCurrentSlide((prev) => 
@@ -244,7 +288,7 @@ const ProductShowcase = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 1 }}
           >
-            {filteredProducts.slice(0, 6).map((product, index) => (
+            {filteredProducts.slice(0, 6).map((product: any, index: number) => (
               <motion.div
                 key={product.id}
                 className="col-span-1"
@@ -356,35 +400,50 @@ const ProductShowcase = () => {
                                        transition-all duration-500"
                           >
                             <div className="flex space-x-4">
-                              <motion.button 
+                              <motion.button
                                 className="p-3 rounded-full bg-leco-electric-blue/20 backdrop-blur-md border border-leco-electric-blue/30
-                                           text-leco-electric-blue hover:bg-leco-electric-blue hover:text-black 
+                                           text-leco-electric-blue hover:bg-leco-electric-blue hover:text-black
                                            transition-all duration-300 neon-glow-blue"
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 whileTap={{ scale: 0.8 }}
+                                onClick={() => handleViewProduct(product.id)}
                                 data-hover
+                                title="查看详情"
                               >
                                 <Eye size={20} />
                               </motion.button>
-                              <motion.button 
-                                className="p-3 rounded-full bg-leco-plasma-purple/20 backdrop-blur-md border border-leco-plasma-purple/30
-                                           text-leco-plasma-purple hover:bg-leco-plasma-purple hover:text-black 
-                                           transition-all duration-300 neon-glow-purple"
+                              <motion.button
+                                className={`p-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
+                                  favorites.has(product.id)
+                                    ? 'bg-leco-plasma-purple text-black border-leco-plasma-purple neon-glow-purple'
+                                    : 'bg-leco-plasma-purple/20 border-leco-plasma-purple/30 text-leco-plasma-purple hover:bg-leco-plasma-purple hover:text-black neon-glow-purple'
+                                }`}
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 whileTap={{ scale: 0.8 }}
+                                onClick={() => handleToggleFavorite(product.id)}
                                 data-hover
+                                title={favorites.has(product.id) ? '取消收藏' : '添加收藏'}
                               >
-                                <Heart size={20} />
+                                <Heart size={20} fill={favorites.has(product.id) ? 'currentColor' : 'none'} />
                               </motion.button>
-                              <motion.button 
-                                className="p-3 rounded-full bg-leco-energy-orange/20 backdrop-blur-md border border-leco-energy-orange/30
-                                           text-leco-energy-orange hover:bg-leco-energy-orange hover:text-black 
-                                           transition-all duration-300 neon-glow-orange"
+                              <motion.button
+                                className={`p-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
+                                  isInCart(product.id)
+                                    ? 'bg-leco-energy-orange text-black border-leco-energy-orange neon-glow-orange'
+                                    : 'bg-leco-energy-orange/20 border-leco-energy-orange/30 text-leco-energy-orange hover:bg-leco-energy-orange hover:text-black neon-glow-orange'
+                                }`}
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 whileTap={{ scale: 0.8 }}
+                                onClick={() => handleAddToCart(product)}
                                 data-hover
+                                title={isInCart(product.id) ? '已在购物车' : '添加到购物车'}
                               >
                                 <ShoppingCart size={20} />
+                                {getItemQuantity(product.id) > 0 && (
+                                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-leco-electric-blue text-black text-xs rounded-full flex items-center justify-center font-bold">
+                                    {getItemQuantity(product.id)}
+                                  </span>
+                                )}
                               </motion.button>
                             </div>
                           </motion.div>
@@ -404,8 +463,20 @@ const ProductShowcase = () => {
                             {product.name}
                           </motion.h3>
                           <p className="text-leco-silver text-sm uppercase tracking-[0.2em] font-light">
-                            {product.category}
+                            {getCategoryName(product.category)}
                           </p>
+                        </div>
+
+                        {/* Price */}
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl font-bold text-leco-electric-blue">
+                            ¥{product.price}
+                          </span>
+                          {product.originalPrice && product.originalPrice > product.price && (
+                            <span className="text-lg text-leco-silver line-through">
+                              ¥{product.originalPrice}
+                            </span>
+                          )}
                         </div>
 
                         {/* Enhanced Rating */}
@@ -440,7 +511,7 @@ const ProductShowcase = () => {
 
                         {/* Enhanced Colors */}
                         <div className="flex space-x-3">
-                          {product.colors.map((color, colorIndex) => (
+                          {product.colors?.map((color: string, colorIndex: number) => (
                             <motion.button
                               key={colorIndex}
                               className="w-8 h-8 rounded-full border-2 border-leco-carbon 

@@ -42,7 +42,7 @@ export interface Product extends BaseEntity {
   currency: string
   images: ProductImage[]
   variants: ProductVariant[]
-  category: Category
+  category: string | Category
   tags: ProductTag[]
   specifications: Record<string, string>
   stock: number

@@ -2,6 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 深色模式变量 */
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #0F0F0F;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  --text-muted: #808080;
+  --accent-blue: #00E5FF;
+  --accent-purple: #8B00FF;
+  --accent-orange: #FF6B00;
+  --accent-green: #39FF14;
+}
+
+/* 浅色模式变量 */
+html:not(.dark) {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --bg-tertiary: #EEEEEE;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --accent-blue: #0066CC;
+  --accent-purple: #6600CC;
+  --accent-orange: #CC4400;
+  --accent-green: #00AA00;
+}
+
+/* 深色模式样式 */
+.dark {
+  --bg-primary: #000000;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #0F0F0F;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  --text-muted: #808080;
+}
+
+/* 主题切换过渡效果 */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 深色模式下的背景和文字 */
+.dark body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.dark .bg-white {
+  background-color: var(--bg-secondary) !important;
+}
+
+.dark .text-black {
+  color: var(--text-primary) !important;
+}
+
+.dark .text-gray-600 {
+  color: var(--text-muted) !important;
+}
+
+.dark .border-gray-200 {
+  border-color: var(--bg-tertiary) !important;
+}
+
+/* 浅色模式特定样式 */
+html:not(.dark) .bg-leco-black {
+  background-color: var(--bg-primary) !important;
+}
+
+html:not(.dark) .bg-leco-gray {
+  background-color: var(--bg-secondary) !important;
+}
+
+html:not(.dark) .text-white {
+  color: var(--text-primary) !important;
+}
+
+html:not(.dark) .text-leco-silver {
+  color: var(--text-secondary) !important;
+}
+
 /* Global Styles */
 * {
   margin: 0;
