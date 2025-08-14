@@ -14,8 +14,8 @@ import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
 import { OrganizationStructuredData, WebsiteStructuredData } from '@/components/StructuredData'
 import LoadingAnimation from '@/components/LoadingAnimation'
-import CustomCursor from '@/components/CustomCursor'
 import ErrorBoundary from '@/components/ErrorBoundary'
+import { ClientOnly } from '@/components/HydrationFix'
 import { initSmoothScroll } from '@/utils/smoothScroll'
 
 export default function Home() {
@@ -40,7 +40,6 @@ export default function Home() {
   return (
     <ErrorBoundary>
       <LoadingAnimation />
-      <CustomCursor />
       <OrganizationStructuredData />
       <WebsiteStructuredData />
       <main className="min-h-screen bg-leco-black">
@@ -55,7 +54,9 @@ export default function Home() {
         <SocialHub />
         <Footer />
       </main>
-      <ScrollToTop />
+      <ClientOnly>
+        <ScrollToTop />
+      </ClientOnly>
     </ErrorBoundary>
   )
 }

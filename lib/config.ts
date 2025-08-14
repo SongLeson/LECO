@@ -85,7 +85,7 @@ export const features = {
   enableFavorites: true,
   enableNewsletter: true,
   enableMultiLanguage: true,
-  enableDarkMode: false,
+  enableDarkMode: true,
   enablePWA: env.enablePWA,
   enableOffline: env.enableOffline,
   

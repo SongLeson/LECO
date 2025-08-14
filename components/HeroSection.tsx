@@ -97,9 +97,9 @@ const HeroSection = () => {
           muted={isMuted}
           loop
           playsInline
-          poster="/images/hero-poster.jpg"
+          poster="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
         >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
         </video>
         
         {/* Enhanced Video Overlay */}
@@ -256,7 +256,6 @@ const HeroSection = () => {
               boxShadow: "0 0 30px rgba(0,229,255,1), 0 0 60px rgba(139,0,255,0.8)"
             }}
             whileTap={{ scale: 0.95 }}
-            data-hover
           >
             <span className="relative z-10 flex items-center space-x-3">
               <span>SHOP NOW</span>
@@ -285,7 +284,6 @@ const HeroSection = () => {
               boxShadow: "0 0 30px rgba(139,0,255,1), 0 0 60px rgba(255,107,0,0.8)"
             }}
             whileTap={{ scale: 0.95 }}
-            data-hover
           >
             <span className="flex items-center space-x-3 relative z-10">
               <Play size={24} className="group-hover:animate-bounce" />
@@ -315,7 +313,6 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.8 }}
           onClick={scrollToNext}
-          data-hover
         >
           <motion.div
             className="flex flex-col items-center space-y-3 text-leco-silver hover:text-leco-electric-blue transition-colors duration-300"

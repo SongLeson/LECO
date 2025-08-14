@@ -30,8 +30,8 @@ const SportsCinema = () => {
       title: "VELOCITY CHAMPIONSHIP",
       subtitle: "Breaking Records",
       duration: "2:45",
-      thumbnail: "/images/events/running.jpg",
-      videoUrl: "/videos/running-event.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
       category: "running",
       date: "2024-01-15"
     },
@@ -40,8 +40,8 @@ const SportsCinema = () => {
       title: "URBAN LEAGUE FINALS",
       subtitle: "Street Basketball",
       duration: "3:20",
-      thumbnail: "/images/events/basketball.jpg",
-      videoUrl: "/videos/basketball-event.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
       category: "basketball",
       date: "2024-01-20"
     },
@@ -50,8 +50,8 @@ const SportsCinema = () => {
       title: "ELITE TRAINING SESSION",
       subtitle: "Behind the Scenes",
       duration: "4:10",
-      thumbnail: "/images/events/training.jpg",
-      videoUrl: "/videos/training-event.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
       category: "training",
       date: "2024-01-25"
     },
@@ -60,8 +60,8 @@ const SportsCinema = () => {
       title: "CHAMPIONS LEAGUE",
       subtitle: "Football Excellence",
       duration: "5:30",
-      thumbnail: "/images/events/football.jpg",
-      videoUrl: "/videos/football-event.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
       category: "football",
       date: "2024-02-01"
     }

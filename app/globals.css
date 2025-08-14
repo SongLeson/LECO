@@ -18,16 +18,16 @@
 
 /* 浅色模式变量 */
 html:not(.dark) {
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F5F5F5;
-  --bg-tertiary: #EEEEEE;
-  --text-primary: #000000;
-  --text-secondary: #333333;
-  --text-muted: #666666;
-  --accent-blue: #0066CC;
-  --accent-purple: #6600CC;
-  --accent-orange: #CC4400;
-  --accent-green: #00AA00;
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #F0F0F0;
+  --bg-tertiary: #E8E8E8;
+  --text-primary: #1A1A1A;
+  --text-secondary: #2D2D2D;
+  --text-muted: #5A5A5A;
+  --accent-blue: #0080FF;
+  --accent-purple: #7C3AED;
+  --accent-orange: #FF6B35;
+  --accent-green: #10B981;
 }
 
 /* 深色模式样式 */
@@ -84,6 +84,28 @@ html:not(.dark) .text-leco-silver {
   color: var(--text-secondary) !important;
 }
 
+/* 浅色模式下的按钮和交互元素 */
+html:not(.dark) .bg-gradient-to-r {
+  background: linear-gradient(to right, var(--accent-blue), var(--accent-green)) !important;
+}
+
+html:not(.dark) .border-leco-electric-blue {
+  border-color: var(--accent-blue) !important;
+}
+
+html:not(.dark) .text-leco-electric-blue {
+  color: var(--accent-blue) !important;
+}
+
+html:not(.dark) .hover\:bg-leco-electric-blue:hover {
+  background-color: var(--accent-blue) !important;
+}
+
+/* 浅色模式下的背景渐变 */
+html:not(.dark) .bg-gradient-to-b {
+  background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-tertiary)) !important;
+}
+
 /* Global Styles */
 * {
   margin: 0;
@@ -102,32 +124,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Hide default cursor only on desktop */
-@media (min-width: 768px) {
-  body {
-    cursor: none;
-  }
-}
 
-/* Custom Cursor */
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, #00E5FF 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transition: transform 0.1s ease;
-}
 
-.custom-cursor.hover {
-  transform: scale(2);
-  background: radial-gradient(circle, #8B00FF 0%, #00E5FF 50%, transparent 70%);
-}
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

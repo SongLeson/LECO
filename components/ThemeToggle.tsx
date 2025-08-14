@@ -5,33 +5,33 @@ import { motion } from 'framer-motion'
 import { Sun, Moon } from 'lucide-react'
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true) // 默认深色模式
   const [mounted, setMounted] = useState(false)
 
   // 确保组件已挂载，避免服务端渲染不一致
   useEffect(() => {
     setMounted(true)
-    
-    // 检查系统主题偏好
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    
+
     // 检查本地存储的主题设置
     const savedTheme = localStorage.getItem('theme')
-    
+
     if (savedTheme) {
-      setIsDark(savedTheme === 'dark')
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark')
+      const isDarkTheme = savedTheme === 'dark'
+      setIsDark(isDarkTheme)
+      document.documentElement.classList.toggle('dark', isDarkTheme)
     } else {
-      // 如果没有保存的主题，使用系统偏好
-      setIsDark(mediaQuery.matches)
-      document.documentElement.classList.toggle('dark', mediaQuery.matches)
+      // 如果没有保存的主题，默认使用深色模式
+      setIsDark(true)
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
     }
 
-    // 监听系统主题变化
+    // 监听系统主题变化（仅在没有用户设置时）
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = (e: MediaQueryListEvent) => {
       if (!localStorage.getItem('theme')) {
-        setIsDark(e.matches)
-        document.documentElement.classList.toggle('dark', e.matches)
+        setIsDark(true) // 保持默认深色模式
+        document.documentElement.classList.add('dark')
       }
     }
 

@@ -3,11 +3,13 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { Zap, Target, Rocket } from 'lucide-react'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const BrandPhilosophy = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
-  
+  const { t } = useTranslation()
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
@@ -17,27 +19,27 @@ const BrandPhilosophy = () => {
     {
       id: 1,
       icon: Zap,
-      title: "SPEED",
-      subtitle: "VELOCITY UNLEASHED",
-      description: "Every second counts. Every movement matters. Our gear is engineered to eliminate friction between you and your peak performance.",
+      title: t('philosophy.speed.title'),
+      subtitle: t('philosophy.speed.subtitle'),
+      description: t('philosophy.speed.description'),
       color: "leco-blue",
       position: "left"
     },
     {
       id: 2,
       icon: Target,
-      title: "PRECISION",
-      subtitle: "PERFECTION REFINED",
-      description: "Precision isn't just accuracy—it's the difference between good and legendary. We craft every detail to perfection.",
+      title: t('philosophy.precision.title'),
+      subtitle: t('philosophy.precision.subtitle'),
+      description: t('philosophy.precision.description'),
       color: "leco-green",
       position: "right"
     },
     {
       id: 3,
       icon: Rocket,
-      title: "BREAKTHROUGH",
-      subtitle: "LIMITS TRANSCENDED",
-      description: "When everyone else stops, we accelerate. Breaking barriers isn't just our mission—it's our DNA.",
+      title: t('philosophy.breakthrough.title'),
+      subtitle: t('philosophy.breakthrough.subtitle'),
+      description: t('philosophy.breakthrough.description'),
       color: "leco-orange",
       position: "left"
     }
@@ -83,8 +85,11 @@ const BrandPhilosophy = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            OUR
-            <span className="block">PHILOSOPHY</span>
+            {t('philosophy.title').split(' ').map((word, index) => (
+              <span key={index} className={index > 0 ? "block" : ""}>
+                {word}
+              </span>
+            ))}
           </motion.h2>
           <motion.p
             className="text-xl text-leco-silver max-w-3xl mx-auto leading-relaxed"
@@ -92,8 +97,7 @@ const BrandPhilosophy = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We don&apos;t just make sports gear. We craft the tools that transform
-            athletes into legends, moments into memories, and dreams into reality.
+            {t('philosophy.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -152,22 +156,27 @@ const BrandPhilosophy = () => {
                     transition={{ duration: 0.8, delay: 1.2 + index * 0.3 }}
                   >
                     <motion.button
-                      className="px-6 py-3 bg-gradient-to-r from-leco-blue to-leco-green 
-                                 text-leco-black font-bold rounded-lg hover:shadow-lg 
-                                 hover:shadow-leco-blue/50 transition-all duration-300"
+                      className="px-6 py-3 bg-gradient-to-r from-leco-electric-blue to-leco-neon-green
+                                 text-leco-black font-bold rounded-lg hover:shadow-lg
+                                 hover:shadow-leco-electric-blue/50 transition-all duration-300
+                                 dark:text-leco-black dark:bg-gradient-to-r dark:from-leco-electric-blue dark:to-leco-neon-green
+                                 hover:scale-105 active:scale-95"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      LEARN MORE
+                      {t('philosophy.learnMore')}
                     </motion.button>
                     <motion.button
-                      className="px-6 py-3 border-2 border-leco-blue text-leco-blue 
-                                 hover:bg-leco-blue hover:text-leco-black font-bold 
-                                 rounded-lg transition-all duration-300"
+                      className="px-6 py-3 border-2 border-leco-electric-blue text-leco-electric-blue
+                                 hover:bg-leco-electric-blue hover:text-leco-black font-bold
+                                 rounded-lg transition-all duration-300
+                                 dark:border-leco-electric-blue dark:text-leco-electric-blue
+                                 dark:hover:bg-leco-electric-blue dark:hover:text-leco-black
+                                 hover:scale-105 active:scale-95"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      EXPLORE
+                      {t('philosophy.explore')}
                     </motion.button>
                   </motion.div>
                 </div>
@@ -265,20 +274,23 @@ const BrandPhilosophy = () => {
           transition={{ duration: 0.8, delay: 2 }}
         >
           <motion.div
-            className="inline-flex items-center space-x-4 px-8 py-4 bg-gradient-to-r 
-                       from-leco-blue via-leco-green to-leco-orange rounded-full"
+            className="inline-flex items-center space-x-4 px-8 py-4 bg-gradient-to-r
+                       from-leco-electric-blue via-leco-neon-green to-leco-energy-orange rounded-full
+                       dark:from-leco-electric-blue dark:via-leco-neon-green dark:to-leco-energy-orange
+                       hover:shadow-lg hover:shadow-leco-electric-blue/30 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-leco-black font-bold text-lg">
-              READY TO MOVE BEYOND LIMITS?
+            <span className="text-leco-black font-bold text-lg dark:text-leco-black">
+              {t('philosophy.cta')}
             </span>
             <motion.div
-              className="w-8 h-8 bg-leco-black rounded-full flex items-center justify-center"
+              className="w-8 h-8 bg-leco-black rounded-full flex items-center justify-center
+                         dark:bg-leco-black"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
             >
-              <Rocket size={16} className="text-white" />
+              <Rocket size={16} className="text-white dark:text-white" />
             </motion.div>
           </motion.div>
         </motion.div>

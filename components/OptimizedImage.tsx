@@ -22,7 +22,7 @@ const OptimizedImage = ({
   width,
   height,
   className = '',
-  placeholder = '/images/placeholder.jpg',
+  placeholder = 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60',
   priority = false,
   quality = 75,
   onLoad,

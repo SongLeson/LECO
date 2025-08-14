@@ -77,7 +77,7 @@ const ProductShowcase = () => {
       name: 'VELOCITY PRO X1',
       category: 'footwear',
       price: 299,
-      image: '/images/products/shoe-1.jpg',
+      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       colors: ['#000000', '#FF6B00', '#00D4FF'],
       isNew: true,
       rating: 4.9
@@ -87,7 +87,7 @@ const ProductShowcase = () => {
       name: 'AERO SPRINT ELITE',
       category: 'footwear',
       price: 349,
-      image: '/images/products/shoe-2.jpg',
+      image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       colors: ['#FFFFFF', '#39FF14', '#8B00FF'],
       isNew: false,
       rating: 4.7
@@ -97,7 +97,7 @@ const ProductShowcase = () => {
       name: 'POWER JACKET PRO',
       category: 'apparel',
       price: 199,
-      image: '/images/products/jacket-1.jpg',
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       colors: ['#000000', '#00D4FF', '#8B00FF'],
       isNew: true,
       rating: 4.8
@@ -107,7 +107,7 @@ const ProductShowcase = () => {
       name: 'ELITE BACKPACK',
       category: 'accessories',
       price: 129,
-      image: '/images/products/backpack-1.jpg',
+      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       colors: ['#000000', '#1A1A1A', '#FF6B00'],
       isNew: false,
       rating: 4.6
@@ -117,7 +117,7 @@ const ProductShowcase = () => {
       name: 'TRAINING SHORTS',
       category: 'apparel',
       price: 89,
-      image: '/images/products/shorts-1.jpg',
+      image: 'https://images.unsplash.com/photo-1506629905607-d9b1e5b6e4e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       colors: ['#000000', '#00D4FF', '#39FF14'],
       isNew: false,
       rating: 4.5
@@ -127,7 +127,7 @@ const ProductShowcase = () => {
       name: 'SMART WATCH',
       category: 'accessories',
       price: 399,
-      image: '/images/products/watch-1.jpg',
+      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       colors: ['#000000', '#E0E0E0', '#00D4FF'],
       isNew: true,
       rating: 4.9
@@ -259,7 +259,6 @@ const ProductShowcase = () => {
               boxShadow: "0 0 25px rgba(0,229,255,0.8)"
             }}
             whileTap={{ scale: 0.9 }}
-            data-hover
           >
             <ChevronLeft size={28} />
           </motion.button>
@@ -276,7 +275,6 @@ const ProductShowcase = () => {
               boxShadow: "0 0 25px rgba(0,229,255,0.8)"
             }}
             whileTap={{ scale: 0.9 }}
-            data-hover
           >
             <ChevronRight size={28} />
           </motion.button>
@@ -407,7 +405,6 @@ const ProductShowcase = () => {
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 whileTap={{ scale: 0.8 }}
                                 onClick={() => handleViewProduct(product.id)}
-                                data-hover
                                 title="查看详情"
                               >
                                 <Eye size={20} />
@@ -421,7 +418,6 @@ const ProductShowcase = () => {
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 whileTap={{ scale: 0.8 }}
                                 onClick={() => handleToggleFavorite(product.id)}
-                                data-hover
                                 title={favorites.has(product.id) ? '取消收藏' : '添加收藏'}
                               >
                                 <Heart size={20} fill={favorites.has(product.id) ? 'currentColor' : 'none'} />
@@ -435,7 +431,6 @@ const ProductShowcase = () => {
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 whileTap={{ scale: 0.8 }}
                                 onClick={() => handleAddToCart(product)}
-                                data-hover
                                 title={isInCart(product.id) ? '已在购物车' : '添加到购物车'}
                               >
                                 <ShoppingCart size={20} />
@@ -524,7 +519,6 @@ const ProductShowcase = () => {
                                 rotate: 180
                               }}
                               whileTap={{ scale: 0.9 }}
-                              data-hover
                             />
                           ))}
                         </div>
@@ -551,7 +545,6 @@ const ProductShowcase = () => {
                               boxShadow: "0 0 25px rgba(0,229,255,1)"
                             }}
                             whileTap={{ scale: 0.95 }}
-                            data-hover
                           >
                             <span>ADD TO CART</span>
                           </motion.button>
@@ -620,7 +613,6 @@ const ProductShowcase = () => {
               boxShadow: "0 0 40px rgba(0,229,255,1), 0 0 80px rgba(139,0,255,0.8)"
             }}
             whileTap={{ scale: 0.95 }}
-            data-hover
           >
             <span className="relative z-10 flex items-center space-x-4">
               <span>VIEW ALL PRODUCTS</span>

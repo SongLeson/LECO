@@ -10,6 +10,7 @@ import LanguageSelector from './Navigation/LanguageSelector'
 import ThemeToggle from './ThemeToggle'
 import useCart from '@/hooks/useCart'
 import useAuth from '@/hooks/useAuth'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -22,6 +23,7 @@ const Navigation = () => {
 
   const { cart, getCartSummary } = useCart()
   const { user, isAuthenticated, logout } = useAuth()
+  const { t, locale, changeLanguage } = useTranslation()
   const cartSummary = getCartSummary()
 
   useEffect(() => {
@@ -33,12 +35,12 @@ const Navigation = () => {
   }, [])
 
   const navItems = [
-    { name: '首页', href: '/', key: 'home' },
-    { name: '产品', href: '#products', key: 'products' },
-    { name: '品牌故事', href: '#philosophy', key: 'brand' },
-    { name: '活动赛事', href: '#events', key: 'events' },
-    { name: '资讯', href: '#news', key: 'news' },
-    { name: '订阅', href: '#subscribe', key: 'subscribe' },
+    { name: t('nav.home'), href: '/', key: 'home' },
+    { name: t('nav.products'), href: '#products', key: 'products' },
+    { name: t('nav.brand'), href: '#philosophy', key: 'brand' },
+    { name: t('nav.events'), href: '#events', key: 'events' },
+    { name: t('nav.news'), href: '#news', key: 'news' },
+    { name: t('nav.subscribe'), href: '#subscribe', key: 'subscribe' },
   ]
 
   // 处理搜索
@@ -50,8 +52,8 @@ const Navigation = () => {
   // 处理语言切换
   const handleLanguageChange = (language: string) => {
     setCurrentLanguage(language)
+    changeLanguage(language as 'zh' | 'en')
     console.log('切换语言:', language)
-    // 这里可以添加语言切换逻辑
   }
 
   // 处理购物车操作
@@ -161,7 +163,7 @@ const Navigation = () => {
               {/* Language Selector */}
               <div className="hidden md:block">
                 <LanguageSelector
-                  currentLanguage={currentLanguage}
+                  currentLanguage={locale}
                   onLanguageChange={handleLanguageChange}
                 />
               </div>

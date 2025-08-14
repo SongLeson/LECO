@@ -26,7 +26,21 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryComponent
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // 记录错误信息
     console.error('ErrorBoundary caught an error:', error, errorInfo)
-    
+
+    // 检查是否是水合错误
+    const isHydrationError = error.message.includes('Hydration failed') ||
+                            error.message.includes('hydration') ||
+                            error.message.includes('did not match')
+
+    if (isHydrationError) {
+      console.warn('Hydration error detected, attempting recovery...')
+      // 对于水合错误，延迟一下再重新渲染，让客户端状态稳定
+      setTimeout(() => {
+        this.setState({ hasError: false, error: undefined, errorInfo: undefined })
+      }, 100)
+      return
+    }
+
     // 更新状态
     this.setState({
       error,
@@ -38,7 +52,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryComponent
       this.props.onError(error, errorInfo)
     }
 
-    // 发送错误到监控服务
+    // 发送错误到监控服务（非水合错误才发送）
     this.logErrorToService(error, errorInfo)
   }
 

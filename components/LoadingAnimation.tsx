@@ -1,11 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ClientOnly } from './HydrationFix'
 
 const LoadingAnimation = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
+
+  // 生成固定的粒子位置，避免水合错误
+  const particlePositions = useMemo(() => {
+    return Array.from({ length: 20 }, (_, i) => ({
+      left: (i * 5.26) % 100, // 使用固定算法生成位置
+      top: (i * 7.89) % 100,
+      delay: (i * 0.1) % 2,
+      duration: 3 + (i % 3),
+    }))
+  }, [])
 
   useEffect(() => {
     // Simulate loading progress
@@ -16,7 +27,7 @@ const LoadingAnimation = () => {
           setTimeout(() => setIsLoading(false), 500)
           return 100
         }
-        return prev + Math.random() * 15
+        return prev + 15 // 使用固定增量而不是随机值
       })
     }, 100)
 
@@ -149,28 +160,30 @@ const LoadingAnimation = () => {
           </motion.div>
 
           {/* Floating Particles */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-leco-electric-blue rounded-full opacity-60"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [0, -100, 0],
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-          </div>
+          <ClientOnly>
+            <div className="absolute inset-0 pointer-events-none">
+              {particlePositions.map((particle, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-leco-electric-blue rounded-full opacity-60"
+                  style={{
+                    left: `${particle.left}%`,
+                    top: `${particle.top}%`,
+                  }}
+                  animate={{
+                    y: [0, -100, 0],
+                    opacity: [0, 1, 0],
+                    scale: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: particle.duration,
+                    repeat: Infinity,
+                    delay: particle.delay,
+                  }}
+                />
+              ))}
+            </div>
+          </ClientOnly>
         </motion.div>
       )}
     </AnimatePresence>
