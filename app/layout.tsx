@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ReactNode } from 'react'
 import './globals.css'
 
 // 开发环境下的全局错误检查（移到组件内部）
@@ -103,7 +104,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   // 设置错误处理
   setupErrorHandling()

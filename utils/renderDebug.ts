@@ -1,5 +1,7 @@
 // 渲染调试工具
 
+import React from 'react'
+
 /**
  * 检查值是否可以安全渲染
  */
