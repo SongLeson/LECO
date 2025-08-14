@@ -2,18 +2,20 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-// 开发环境下的全局错误检查
-if (process.env.NODE_ENV === 'development') {
-  const originalConsoleError = console.error
-  console.error = (...args) => {
-    const message = args.join(' ')
-    if (message.includes('Objects are not valid as a React child')) {
-      console.group('🚨 React Render Error Detected')
-      console.error('Error:', ...args)
-      console.trace('Stack trace:')
-      console.groupEnd()
+// 开发环境下的全局错误检查（移到组件内部）
+const setupErrorHandling = () => {
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    const originalConsoleError = console.error
+    console.error = (...args) => {
+      const message = args.join(' ')
+      if (message.includes('Objects are not valid as a React child')) {
+        console.group('🚨 React Render Error Detected')
+        console.error('Error:', ...args)
+        console.trace('Stack trace:')
+        console.groupEnd()
+      }
+      originalConsoleError.apply(console, args)
     }
-    originalConsoleError.apply(console, args)
   }
 }
 
@@ -103,6 +105,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // 设置错误处理
+  setupErrorHandling()
+
   return (
     <html lang="en" className="scroll-smooth">
       <head>

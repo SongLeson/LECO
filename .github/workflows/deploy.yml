@@ -37,6 +37,10 @@ jobs:
     - name: Build Next.js application
       run: |
         npm run build
+
+    - name: Prepare for GitHub Pages
+      run: |
+        node scripts/deploy-github-pages.js
         
     - name: Setup Pages
       uses: actions/configure-pages@v4

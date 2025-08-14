@@ -2,10 +2,14 @@
 const nextConfig = {
   // 输出配置
   output: 'export',
-  
+
   // 静态导出配置
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
+
+  // GitHub Pages 配置
+  basePath: process.env.NODE_ENV === 'production' ? '' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
   
   // 图片优化配置
   images: {
