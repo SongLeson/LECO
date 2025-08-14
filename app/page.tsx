@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Navigation from '@/components/Navigation'
 import HeroSection from '@/components/HeroSection'
 import ProductShowcase from '@/components/ProductShowcase'
@@ -19,16 +19,12 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 import { initSmoothScroll } from '@/utils/smoothScroll'
 
 export default function Home() {
-  const [isMounted, setIsMounted] = useState(false)
-
   useEffect(() => {
-    setIsMounted(true)
-    
     // Initialize smooth scroll
     const timer = setTimeout(() => {
       initSmoothScroll()
     }, 100)
-    
+
     // Preload critical resources safely
     if (typeof window !== 'undefined') {
       const preloadVideo = document.createElement('link')
@@ -40,14 +36,6 @@ export default function Home() {
 
     return () => clearTimeout(timer)
   }, [])
-
-  if (!isMounted) {
-    return (
-      <div className="min-h-screen bg-leco-black flex items-center justify-center">
-        <div className="text-leco-electric-blue text-2xl font-display">LECO</div>
-      </div>
-    )
-  }
 
   return (
     <ErrorBoundary>
