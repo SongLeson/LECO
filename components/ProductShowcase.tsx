@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart, Star } from 'lucide-react'
+import Image from 'next/image'
 import useCart from '@/hooks/useCart'
 import { getCategoryName } from '@/utils/safeRender'
 // import useProducts from '@/hooks/useProducts'
@@ -333,18 +334,34 @@ const ProductShowcase = () => {
 
                       {/* Product Image */}
                       <div className="relative mb-6 overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-500">
-                        <motion.div 
-                          className="aspect-[4/3] bg-gradient-to-br from-leco-carbon via-leco-gray to-leco-carbon 
-                                     flex items-center justify-center relative overflow-hidden"
+                        <motion.div
+                          className="aspect-[4/3] bg-gradient-to-br from-leco-carbon via-leco-gray to-leco-carbon
+                                     relative overflow-hidden"
                           whileHover={{ scale: 1.05 }}
                         >
-                          {/* Product Representation */}
-                          <motion.div 
-                            className={`w-40 h-40 rounded-2xl flex items-center justify-center text-black 
-                                       font-bold text-2xl font-display relative
-                                       ${index % 3 === 0 
-                                         ? 'bg-gradient-to-br from-leco-electric-blue to-leco-plasma-purple' 
-                                         : index % 3 === 1 
+                          {/* Actual Product Image */}
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            className="object-cover rounded-xl"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            onError={(e) => {
+                              // Fallback to gradient placeholder if image fails to load
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              const fallback = target.parentElement?.querySelector('.fallback-placeholder') as HTMLElement;
+                              if (fallback) fallback.style.display = 'flex';
+                            }}
+                          />
+
+                          {/* Fallback Product Representation (hidden by default) */}
+                          <motion.div
+                            className={`fallback-placeholder absolute inset-0 w-full h-full rounded-xl flex items-center justify-center text-black
+                                       font-bold text-2xl font-display relative hidden
+                                       ${index % 3 === 0
+                                         ? 'bg-gradient-to-br from-leco-electric-blue to-leco-plasma-purple'
+                                         : index % 3 === 1
                                          ? 'bg-gradient-to-br from-leco-plasma-purple to-leco-energy-orange'
                                          : 'bg-gradient-to-br from-leco-energy-orange to-leco-electric-blue'
                                        }`}
@@ -358,10 +375,10 @@ const ProductShowcase = () => {
                             }}
                           >
                             {product.name.split(' ')[0]}
-                            
+
                             {/* Holographic Effect */}
                             <motion.div
-                              className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                              className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/20 to-transparent"
                               animate={{
                                 x: ['-100%', '100%'],
                               }}
