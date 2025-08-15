@@ -2,7 +2,8 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { Zap, Target, Rocket } from 'lucide-react'
+import { Mountain, Compass, Flame } from 'lucide-react'
+import Image from 'next/image'
 import { useTranslation } from '@/hooks/useTranslation'
 
 const BrandPhilosophy = () => {
@@ -18,57 +19,100 @@ const BrandPhilosophy = () => {
   const philosophies = [
     {
       id: 1,
-      icon: Zap,
+      icon: Mountain,
       title: t('philosophy.speed.title'),
       subtitle: t('philosophy.speed.subtitle'),
       description: t('philosophy.speed.description'),
       color: "leco-blue",
-      position: "left"
+      position: "left",
+      image: "https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
       id: 2,
-      icon: Target,
+      icon: Compass,
       title: t('philosophy.precision.title'),
       subtitle: t('philosophy.precision.subtitle'),
       description: t('philosophy.precision.description'),
       color: "leco-green",
-      position: "right"
+      position: "right",
+      image: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
       id: 3,
-      icon: Rocket,
+      icon: Flame,
       title: t('philosophy.breakthrough.title'),
       subtitle: t('philosophy.breakthrough.subtitle'),
       description: t('philosophy.breakthrough.description'),
       color: "leco-orange",
-      position: "left"
+      position: "left",
+      image: "https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&w=800"
     }
   ]
 
   return (
     <section
-      id="philosophy" 
+      id="philosophy"
       ref={sectionRef}
-      className="relative py-20 bg-gradient-to-b from-leco-gray to-leco-black overflow-hidden"
+      className="relative py-20 bg-gradient-to-b from-leco-black via-leco-gray to-leco-black overflow-hidden"
     >
-      {/* Animated Background Elements */}
+      {/* Dynamic Mountain Background */}
       <div className="absolute inset-0">
+        {/* Mountain Silhouette */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-leco-black via-leco-gray/50 to-transparent"
+             style={{
+               clipPath: 'polygon(0 100%, 0 60%, 15% 45%, 25% 55%, 35% 40%, 50% 50%, 65% 35%, 80% 45%, 90% 30%, 100% 40%, 100% 100%)'
+             }}
+        />
+
+        {/* Animated Energy Orbs */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-leco-blue/10 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/6 w-32 h-32 bg-leco-electric-blue/20 rounded-full blur-2xl"
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.8, 0.3],
+            x: [0, 50, 0],
           }}
-          transition={{ duration: 4, repeat: Infinity }}
+          transition={{ duration: 6, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-leco-green/10 rounded-full blur-3xl"
+          className="absolute top-1/3 right-1/4 w-48 h-48 bg-leco-energy-orange/15 rounded-full blur-3xl"
           animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.6, 0.3, 0.6],
+            scale: [1.2, 0.8, 1.2],
+            opacity: [0.4, 0.7, 0.4],
+            y: [0, -30, 0],
           }}
-          transition={{ duration: 5, repeat: Infinity }}
+          transition={{ duration: 8, repeat: Infinity }}
         />
+        <motion.div
+          className="absolute bottom-1/3 left-1/3 w-24 h-24 bg-leco-neon-green/25 rounded-full blur-xl"
+          animate={{
+            scale: [0.8, 1.3, 0.8],
+            opacity: [0.5, 0.9, 0.5],
+            rotate: [0, 180, 360],
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+
+        {/* Floating Particles */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/40 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
       </div>
 
       <div className="sport-container relative z-10">
@@ -181,83 +225,97 @@ const BrandPhilosophy = () => {
                   </motion.div>
                 </div>
 
-                {/* Visual Side */}
+                {/* Visual Side - Extreme Sports Images */}
                 <motion.div
                   className="flex-1 relative"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 1, delay: 0.8 + index * 0.3 }}
                 >
-                  <div className="relative w-full max-w-md mx-auto">
-                    {/* Main Visual Container */}
+                  <div className="relative w-full max-w-lg mx-auto">
+                    {/* Main Image Container */}
                     <motion.div
-                      className={`aspect-square rounded-2xl bg-gradient-to-br from-${philosophy.color}/20 to-${philosophy.color}/5 
-                                  border border-${philosophy.color}/30 backdrop-blur-sm relative overflow-hidden`}
-                      whileHover={{ scale: 1.02, rotate: 1 }}
+                      className="relative aspect-[4/3] rounded-2xl overflow-hidden group"
+                      whileHover={{ scale: 1.05, rotateY: 5 }}
                       transition={{ duration: 0.5 }}
                     >
-                      {/* Animated Background Pattern */}
-                      <div className="absolute inset-0">
-                        <motion.div
-                          className={`absolute inset-0 bg-gradient-to-br from-${philosophy.color}/10 to-transparent`}
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        />
-                        <motion.div
-                          className={`absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-${philosophy.color}/20 rounded-full blur-xl`}
-                          animate={{
-                            scale: [1, 1.5, 1],
-                            opacity: [0.5, 0.8, 0.5],
-                          }}
-                          transition={{ duration: 3, repeat: Infinity }}
-                        />
-                      </div>
+                      {/* Extreme Sports Image */}
+                      <Image
+                        src={philosophy.image}
+                        alt={philosophy.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
 
-                      {/* Central Icon */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          className={`p-8 rounded-full bg-gradient-to-br from-${philosophy.color} to-${philosophy.color}/80`}
-                          animate={{ 
-                            rotate: [0, 10, -10, 0],
-                            scale: [1, 1.05, 1],
-                          }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                        >
-                          <philosophy.icon size={64} className="text-leco-black" />
-                        </motion.div>
-                      </div>
+                      {/* Dynamic Overlay */}
+                      <motion.div
+                        className={`absolute inset-0 bg-gradient-to-br from-${philosophy.color}/30 via-transparent to-leco-black/60`}
+                        animate={{
+                          opacity: [0.7, 0.9, 0.7],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
 
-                      {/* Floating Elements */}
-                      {[...Array(6)].map((_, i) => (
+                      {/* Floating Icon */}
+                      <motion.div
+                        className="absolute top-6 right-6 p-4 rounded-full bg-leco-black/80 backdrop-blur-sm border border-white/20"
+                        animate={{
+                          rotate: [0, 360],
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{ duration: 8, repeat: Infinity }}
+                      >
+                        <philosophy.icon size={32} className={`text-${philosophy.color}`} />
+                      </motion.div>
+
+                      {/* Energy Particles */}
+                      {[...Array(8)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className={`absolute w-3 h-3 bg-${philosophy.color} rounded-full`}
+                          className={`absolute w-2 h-2 bg-${philosophy.color} rounded-full`}
                           style={{
-                            left: `${20 + (i * 15)}%`,
-                            top: `${30 + (i * 10)}%`,
+                            left: `${15 + (i * 10)}%`,
+                            top: `${20 + (i * 8)}%`,
                           }}
                           animate={{
-                            y: [0, -20, 0],
-                            opacity: [0.3, 1, 0.3],
+                            y: [0, -30, 0],
+                            opacity: [0, 1, 0],
+                            scale: [0.5, 1.5, 0.5],
                           }}
                           transition={{
-                            duration: 2 + i * 0.5,
+                            duration: 2 + i * 0.3,
                             repeat: Infinity,
-                            delay: i * 0.3,
+                            delay: i * 0.2,
                           }}
                         />
                       ))}
+
+                      {/* Bottom Gradient */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-leco-black/90 to-transparent" />
+
+                      {/* Sport Category Label */}
+                      <motion.div
+                        className="absolute bottom-4 left-4 px-4 py-2 bg-leco-black/80 backdrop-blur-sm rounded-lg border border-white/20"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.8, delay: 1.2 + index * 0.3 }}
+                      >
+                        <span className={`text-${philosophy.color} font-bold text-sm tracking-wider uppercase`}>
+                          {philosophy.title.split(' ')[0]}
+                        </span>
+                      </motion.div>
                     </motion.div>
 
                     {/* Glow Effect */}
                     <motion.div
-                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-${philosophy.color}/20 to-transparent 
-                                  blur-xl scale-110 opacity-50`}
+                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-${philosophy.color}/20 to-transparent
+                                  blur-2xl scale-110 opacity-40`}
                       animate={{
-                        opacity: [0.3, 0.7, 0.3],
-                        scale: [1.1, 1.2, 1.1],
+                        opacity: [0.2, 0.6, 0.2],
+                        scale: [1.1, 1.3, 1.1],
                       }}
-                      transition={{ duration: 3, repeat: Infinity }}
+                      transition={{ duration: 4, repeat: Infinity }}
                     />
                   </div>
                 </motion.div>
@@ -290,7 +348,7 @@ const BrandPhilosophy = () => {
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
             >
-              <Rocket size={16} className="text-white dark:text-white" />
+              <Flame size={16} className="text-white dark:text-white" />
             </motion.div>
           </motion.div>
         </motion.div>

@@ -3,50 +3,55 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Heart, ShoppingCart, Star, Plus, Minus } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import useCart from '@/hooks/useCart'
 import { formatPrice } from '@/utils/format'
 
-// Mock产品数据
+// Mock产品数据 - 户外极限运动装备
 const mockProduct = {
   id: '1',
-  name: 'LECO Speed Runner Pro',
-  description: '专业跑步鞋，采用最新科技材料，提供极致的速度体验。这款跑鞋结合了轻量化设计和卓越的缓震性能，让每一步都充满力量。',
-  price: 899,
-  originalPrice: 1299,
+  name: 'LECO Alpine Summit Boots',
+  description: '专业登山靴，专为极限户外环境设计。采用防水透气材料和高强度鞋底，在最恶劣的山地环境中提供卓越的保护和抓地力。每一步都是对极限的挑战。',
+  price: 1299,
+  originalPrice: 1899,
   images: [
-    { url: '/images/products/shoe1-1.jpg', alt: 'LECO Speed Runner Pro' },
-    { url: '/images/products/shoe1-2.jpg', alt: 'LECO Speed Runner Pro 侧面' },
-    { url: '/images/products/shoe1-3.jpg', alt: 'LECO Speed Runner Pro 底部' },
+    { url: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'LECO Alpine Summit Boots' },
+    { url: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'LECO Alpine Summit Boots 侧面' },
+    { url: 'https://images.pexels.com/photos/1374064/pexels-photo-1374064.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'LECO Alpine Summit Boots 底部' },
   ],
   category: 'footwear',
-  tags: ['NEW', 'HOT'],
-  stock: 50,
-  rating: 4.8,
-  reviewCount: 128,
+  tags: ['EXTREME', 'WATERPROOF', 'NEW'],
+  stock: 25,
+  rating: 4.9,
+  reviewCount: 89,
   variants: [
-    { id: 'size-40', name: '尺码', value: '40', stock: 10 },
-    { id: 'size-41', name: '尺码', value: '41', stock: 15 },
-    { id: 'size-42', name: '尺码', value: '42', stock: 20 },
-    { id: 'size-43', name: '尺码', value: '43', stock: 5 },
+    { id: 'size-40', name: '尺码', value: '40', stock: 3 },
+    { id: 'size-41', name: '尺码', value: '41', stock: 5 },
+    { id: 'size-42', name: '尺码', value: '42', stock: 8 },
+    { id: 'size-43', name: '尺码', value: '43', stock: 6 },
+    { id: 'size-44', name: '尺码', value: '44', stock: 3 },
   ],
   colors: [
-    { name: '电蓝', value: '#00E5FF', image: '/images/products/shoe1-blue.jpg' },
-    { name: '等离子紫', value: '#8B00FF', image: '/images/products/shoe1-purple.jpg' },
-    { name: '能量橙', value: '#FF6B00', image: '/images/products/shoe1-orange.jpg' },
+    { name: '极地黑', value: '#000000', image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { name: '冰川蓝', value: '#00E5FF', image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { name: '岩石灰', value: '#8B8B8B', image: 'https://images.pexels.com/photos/1374064/pexels-photo-1374064.jpeg?auto=compress&cs=tinysrgb&w=800' },
   ],
   features: [
-    '轻量化设计，减轻足部负担',
-    '高弹性中底，提供卓越缓震',
-    '透气网面，保持足部干爽',
-    '防滑橡胶大底，增强抓地力',
-    '人体工学设计，贴合足型',
+    '防水透气Gore-Tex材料，全天候保护',
+    'Vibram高性能橡胶大底，极致抓地力',
+    '碳纤维中底板，提供卓越支撑',
+    '保温隔热设计，适应极地环境',
+    '快速系带系统，便于穿脱调节',
+    '防撞鞋头设计，保护足部安全',
   ],
   specifications: {
-    '重量': '280g (单只)',
-    '材质': '合成纤维 + 橡胶',
-    '适用场景': '跑步、训练、日常',
-    '保修期': '1年',
+    '重量': '680g (单只)',
+    '材质': 'Gore-Tex + Vibram橡胶 + 碳纤维',
+    '适用场景': '登山、徒步、极地探险',
+    '防水等级': 'IPX8',
+    '温度范围': '-40°C 至 +20°C',
+    '保修期': '2年',
   }
 }
 
@@ -100,35 +105,82 @@ export default function ProductDetailClient({ productId }: ProductDetailClientPr
           {/* 产品图片 */}
           <div className="space-y-4">
             {/* 主图 */}
-            <motion.div 
-              className="aspect-square bg-leco-gray rounded-2xl overflow-hidden"
+            <motion.div
+              className="aspect-square bg-leco-gray rounded-2xl overflow-hidden relative group"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-leco-electric-blue to-leco-plasma-purple flex items-center justify-center">
-                <div className="text-6xl font-display font-black text-leco-black">
-                  LECO
-                </div>
+              <Image
+                src={product.images[activeImageIndex]?.url || product.images[0].url}
+                alt={product.images[activeImageIndex]?.alt || product.name}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+
+              {/* 悬浮效果 */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-leco-electric-blue/10 via-transparent to-leco-plasma-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                animate={{
+                  background: [
+                    'linear-gradient(45deg, rgba(0,229,255,0.1) 0%, transparent 50%, rgba(139,0,255,0.1) 100%)',
+                    'linear-gradient(45deg, rgba(139,0,255,0.1) 0%, transparent 50%, rgba(255,107,0,0.1) 100%)',
+                    'linear-gradient(45deg, rgba(255,107,0,0.1) 0%, transparent 50%, rgba(0,229,255,0.1) 100%)',
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+
+              {/* 产品标签 */}
+              <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                {product.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-leco-energy-orange text-leco-black text-xs font-bold rounded-full backdrop-blur-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </motion.div>
 
             {/* 缩略图 */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 overflow-x-auto pb-2">
               {product.images.map((image, index) => (
-                <button
+                <motion.button
                   key={index}
-                  className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors duration-200 ${
-                    activeImageIndex === index 
-                      ? 'border-leco-electric-blue' 
+                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 relative ${
+                    activeImageIndex === index
+                      ? 'border-leco-electric-blue shadow-lg shadow-leco-electric-blue/30'
                       : 'border-leco-carbon hover:border-leco-electric-blue/50'
                   }`}
                   onClick={() => setActiveImageIndex(index)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-leco-carbon to-leco-gray flex items-center justify-center">
-                    <span className="text-xs font-bold text-white">{index + 1}</span>
-                  </div>
-                </button>
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+
+                  {/* 选中指示器 */}
+                  {activeImageIndex === index && (
+                    <motion.div
+                      className="absolute inset-0 bg-leco-electric-blue/20 flex items-center justify-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="w-3 h-3 bg-leco-electric-blue rounded-full" />
+                    </motion.div>
+                  )}
+                </motion.button>
               ))}
             </div>
           </div>

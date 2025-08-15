@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart, Star } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import useCart from '@/hooks/useCart'
 import { getCategoryName } from '@/utils/safeRender'
@@ -71,64 +71,64 @@ const ProductShowcase = () => {
 
 
 
-  // 静态产品数据作为fallback
+  // 静态产品数据作为fallback - 户外极限运动装备
   const mockProducts: Product[] = [
     {
       id: 1,
-      name: 'VELOCITY PRO X1',
+      name: 'ALPINE SUMMIT BOOTS',
       category: 'footwear',
-      price: 299,
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      price: 399,
+      image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800',
       colors: ['#000000', '#FF6B00', '#00D4FF'],
       isNew: true,
       rating: 4.9
     },
     {
       id: 2,
-      name: 'AERO SPRINT ELITE',
+      name: 'TRAIL RUNNER ELITE',
       category: 'footwear',
-      price: 349,
-      image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      price: 299,
+      image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800',
       colors: ['#FFFFFF', '#39FF14', '#8B00FF'],
       isNew: false,
       rating: 4.7
     },
     {
       id: 3,
-      name: 'POWER JACKET PRO',
+      name: 'EXTREME WEATHER JACKET',
       category: 'apparel',
-      price: 199,
-      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      price: 549,
+      image: 'https://images.pexels.com/photos/1374064/pexels-photo-1374064.jpeg?auto=compress&cs=tinysrgb&w=800',
       colors: ['#000000', '#00D4FF', '#8B00FF'],
       isNew: true,
       rating: 4.8
     },
     {
       id: 4,
-      name: 'ELITE BACKPACK',
+      name: 'EXPEDITION BACKPACK',
       category: 'accessories',
-      price: 129,
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      price: 249,
+      image: 'https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&w=800',
       colors: ['#000000', '#1A1A1A', '#FF6B00'],
       isNew: false,
       rating: 4.6
     },
     {
       id: 5,
-      name: 'TRAINING SHORTS',
-      category: 'apparel',
-      price: 89,
-      image: 'https://images.unsplash.com/photo-1506629905607-d9b1e5b6e4e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      name: 'CLIMBING HARNESS PRO',
+      category: 'accessories',
+      price: 189,
+      image: 'https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=800',
       colors: ['#000000', '#00D4FF', '#39FF14'],
       isNew: false,
       rating: 4.5
     },
     {
       id: 6,
-      name: 'SMART WATCH',
+      name: 'ADVENTURE GPS WATCH',
       category: 'accessories',
-      price: 399,
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      price: 599,
+      image: 'https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=800',
       colors: ['#000000', '#E0E0E0', '#00D4FF'],
       isNew: true,
       rating: 4.9

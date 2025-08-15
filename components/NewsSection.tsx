@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Calendar, User, ArrowRight, Tag, Clock, Eye } from 'lucide-react'
+import Image from 'next/image'
 
 interface NewsArticle {
   id: string
@@ -38,7 +39,7 @@ const NewsSection = () => {
       views: 2340,
       category: 'product',
       tags: ['新品发布', '科技创新', '运动装备'],
-      image: '/images/news/spring-collection.jpg',
+      image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800',
       featured: true
     },
     {
@@ -52,7 +53,7 @@ const NewsSection = () => {
       views: 1890,
       category: 'training',
       tags: ['训练指南', '个人化', '专业建议'],
-      image: '/images/news/training-guide.jpg',
+      image: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800',
       featured: false
     },
     {
@@ -66,7 +67,7 @@ const NewsSection = () => {
       views: 3120,
       category: 'news',
       tags: ['运动员', '国际赛事', '佳绩'],
-      image: '/images/news/athlete-achievement.jpg',
+      image: 'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=800',
       featured: true
     },
     {
@@ -80,7 +81,7 @@ const NewsSection = () => {
       views: 1560,
       category: 'health',
       tags: ['运动营养', '饮食搭配', '健康'],
-      image: '/images/news/sports-nutrition.jpg',
+      image: 'https://images.pexels.com/photos/1374064/pexels-photo-1374064.jpeg?auto=compress&cs=tinysrgb&w=800',
       featured: false
     },
     {
@@ -94,7 +95,7 @@ const NewsSection = () => {
       views: 980,
       category: 'sustainability',
       tags: ['可持续发展', '环保', '企业责任'],
-      image: '/images/news/sustainability.jpg',
+      image: 'https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&w=800',
       featured: false
     },
     {
@@ -108,7 +109,7 @@ const NewsSection = () => {
       views: 2100,
       category: 'technology',
       tags: ['人工智能', '运动训练', '科技创新'],
-      image: '/images/news/ai-training.jpg',
+      image: 'https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=800',
       featured: true
     }
   ]
@@ -238,12 +239,17 @@ const NewsSection = () => {
                   whileHover={{ y: -10 }}
                 >
                   {/* 文章图片 */}
-                  <div className="relative h-64 bg-gradient-to-br from-leco-electric-blue to-leco-plasma-purple overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-6xl font-display font-black text-leco-black opacity-10">
-                        LECO
-                      </div>
-                    </div>
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+
+                    {/* 渐变覆盖层 */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-leco-black/60 via-transparent to-transparent" />
                     
                     {/* 特色标签 */}
                     <div className="absolute top-4 left-4">
@@ -341,12 +347,17 @@ const NewsSection = () => {
               whileHover={{ y: -5 }}
             >
               {/* 文章图片 */}
-              <div className="relative h-48 bg-gradient-to-br from-leco-carbon to-leco-gray overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-4xl font-display font-black text-leco-silver opacity-20">
-                    LECO
-                  </div>
-                </div>
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+
+                {/* 渐变覆盖层 */}
+                <div className="absolute inset-0 bg-gradient-to-t from-leco-black/40 via-transparent to-transparent" />
                 
                 {/* 分类标签 */}
                 <div className="absolute top-3 right-3">

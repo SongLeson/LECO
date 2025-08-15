@@ -4,6 +4,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { CartPreviewProps } from '@/types/components'
 import { formatPrice } from '@/utils/format'
 import { getVariantInfo } from '@/utils/safeRender'
@@ -111,11 +112,13 @@ const CartPreview: React.FC<CartPreviewProps> = ({
               {cart.items.map((item) => (
                 <div key={item.id} className="flex items-center space-x-3 group">
                   {/* 商品图片 */}
-                  <div className="flex-shrink-0 w-16 h-16 bg-leco-carbon rounded-lg overflow-hidden">
-                    <img
-                      src={item.product.images[0]?.url || '/images/placeholder.jpg'}
+                  <div className="flex-shrink-0 w-16 h-16 bg-leco-carbon rounded-lg overflow-hidden relative">
+                    <Image
+                      src={item.product.images[0]?.url || 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=400'}
                       alt={item.product.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="64px"
                     />
                   </div>
 

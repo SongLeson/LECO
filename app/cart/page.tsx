@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import useCart from '@/hooks/useCart'
 import { formatPrice } from '@/utils/format'
 import { getCategoryName, getVariantInfo } from '@/utils/safeRender'
@@ -142,11 +143,13 @@ export default function CartPage() {
                   >
                     <div className="flex items-center space-x-4">
                       {/* 商品图片 */}
-                      <div className="w-24 h-24 bg-leco-carbon rounded-lg overflow-hidden flex-shrink-0">
-                        <img
-                          src={imageUrl}
+                      <div className="w-24 h-24 bg-leco-carbon rounded-lg overflow-hidden flex-shrink-0 relative">
+                        <Image
+                          src={imageUrl || 'https://images.unsplash.com/photo-1551524164-6cf2ac2d8c8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'}
                           alt={productName || '商品图片'}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="96px"
                         />
                       </div>
 

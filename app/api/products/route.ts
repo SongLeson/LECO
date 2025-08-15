@@ -32,7 +32,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<ProductsAp
         images: [
           {
             id: '1-1',
-            url: '/images/products/shoe-1-main.jpg',
+            url: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800',
             alt: 'LECO Air Max Pro 主图',
             width: 800,
             height: 600,
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<ProductsAp
           },
           {
             id: '1-2',
-            url: '/images/products/shoe-1-side.jpg',
+            url: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800',
             alt: 'LECO Air Max Pro 侧面',
             width: 800,
             height: 600,

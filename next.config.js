@@ -22,6 +22,7 @@ const nextConfig = {
     unoptimized: true, // GitHub Pages 不支持 Next.js 图片优化
     domains: [
       'images.unsplash.com',
+      'images.pexels.com',
       'cdn.pixabay.com',
       'source.unsplash.com'
     ],

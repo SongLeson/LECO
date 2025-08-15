@@ -5,7 +5,129 @@ import { CartApiResponse, AddToCartRequest, AddToCartResponse } from '@/types/ap
 import { CartItem, Product } from '@/types'
 
 // 模拟购物车存储（实际项目中应该使用数据库）
-let mockCart: CartItem[] = []
+let mockCart: CartItem[] = [
+  // 添加一些初始商品用于演示
+  {
+    id: 'cart-demo-1',
+    productId: '1',
+    product: {
+      id: '1',
+      name: 'LECO Alpine Summit Boots',
+      description: '专业登山靴，专为极限户外环境设计。',
+      price: 1299,
+      originalPrice: 1899,
+      currency: 'CNY',
+      images: [
+        {
+          id: '1-1',
+          url: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800',
+          alt: 'LECO Alpine Summit Boots',
+          width: 800,
+          height: 600,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        {
+          id: '1-v1',
+          name: '尺码',
+          value: '42',
+          stock: 10,
+          sku: 'LECO-ASB-42',
+        },
+      ],
+      category: {
+        id: 'footwear',
+        name: '户外鞋靴',
+        slug: 'footwear',
+        createdAt: '2024-01-01T00:00:00Z',
+        updatedAt: '2024-01-01T00:00:00Z',
+      },
+      tags: ['EXTREME', 'WATERPROOF', 'NEW'],
+      specifications: {
+        '材质': 'Gore-Tex + Vibram橡胶',
+        '防水等级': 'IPX8',
+      },
+      stock: 25,
+      rating: 4.9,
+      reviewCount: 89,
+      isNew: true,
+      isHot: true,
+      isLimited: false,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T00:00:00Z',
+    },
+    quantity: 1,
+    variant: {
+      id: '1-v1',
+      name: '尺码',
+      value: '42',
+      stock: 10,
+      sku: 'LECO-ASB-42',
+    },
+    addedAt: '2024-01-15T10:00:00Z',
+  },
+  {
+    id: 'cart-demo-2',
+    productId: '2',
+    product: {
+      id: '2',
+      name: 'LECO Trail Runner Elite',
+      description: '专业越野跑鞋，轻量化设计。',
+      price: 899,
+      originalPrice: 1299,
+      currency: 'CNY',
+      images: [
+        {
+          id: '2-1',
+          url: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800',
+          alt: 'LECO Trail Runner Elite',
+          width: 800,
+          height: 600,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        {
+          id: '2-v1',
+          name: '尺码',
+          value: '41',
+          stock: 15,
+          sku: 'LECO-TRE-41',
+        },
+      ],
+      category: {
+        id: 'footwear',
+        name: '户外鞋靴',
+        slug: 'footwear',
+        createdAt: '2024-01-01T00:00:00Z',
+        updatedAt: '2024-01-01T00:00:00Z',
+      },
+      tags: ['LIGHTWEIGHT', 'TRAIL'],
+      specifications: {
+        '材质': '合成纤维 + 橡胶',
+        '重量': '280g (单只)',
+      },
+      stock: 30,
+      rating: 4.7,
+      reviewCount: 156,
+      isNew: false,
+      isHot: true,
+      isLimited: false,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-15T00:00:00Z',
+    },
+    quantity: 2,
+    variant: {
+      id: '2-v1',
+      name: '尺码',
+      value: '41',
+      stock: 15,
+      sku: 'LECO-TRE-41',
+    },
+    addedAt: '2024-01-15T11:00:00Z',
+  },
+]
 
 /**
  * 获取购物车数据
@@ -81,19 +203,27 @@ export async function POST(request: NextRequest): Promise<NextResponse<AddToCart
     // 模拟获取产品数据（实际项目中应该从数据库获取）
     const mockProduct: Product = {
       id: productId,
-      name: 'LECO Air Max Pro',
-      description: '革命性的运动鞋，采用最新的气垫技术。',
-      price: 899,
-      originalPrice: 1299,
+      name: 'LECO Alpine Summit Boots',
+      description: '专业登山靴，专为极限户外环境设计。采用防水透气材料和高强度鞋底。',
+      price: 1299,
+      originalPrice: 1899,
       currency: 'CNY',
       images: [
         {
           id: '1-1',
-          url: '/images/products/shoe-1-main.jpg',
-          alt: 'LECO Air Max Pro 主图',
+          url: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=800',
+          alt: 'LECO Alpine Summit Boots 主图',
           width: 800,
           height: 600,
           isPrimary: true,
+        },
+        {
+          id: '1-2',
+          url: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800',
+          alt: 'LECO Alpine Summit Boots 侧面',
+          width: 800,
+          height: 600,
+          isPrimary: false,
         },
       ],
       variants: [
@@ -102,20 +232,29 @@ export async function POST(request: NextRequest): Promise<NextResponse<AddToCart
           name: '尺码',
           value: '42',
           stock: 10,
-          sku: 'LECO-AMP-42',
+          sku: 'LECO-ASB-42',
+        },
+        {
+          id: '1-v2',
+          name: '尺码',
+          value: '43',
+          stock: 8,
+          sku: 'LECO-ASB-43',
         },
       ],
       category: {
         id: 'footwear',
-        name: '运动鞋',
+        name: '户外鞋靴',
         slug: 'footwear',
         createdAt: '2024-01-01T00:00:00Z',
         updatedAt: '2024-01-01T00:00:00Z',
       },
-      tags: ['HOT', 'SALE'],
+      tags: ['EXTREME', 'WATERPROOF', 'NEW'],
       specifications: {
-        '材质': '合成革 + 网布',
-        '鞋底': 'EVA + 橡胶',
+        '材质': 'Gore-Tex + Vibram橡胶',
+        '鞋底': 'Vibram高性能橡胶大底',
+        '防水等级': 'IPX8',
+        '温度范围': '-40°C 至 +20°C',
       },
       stock: 15,
       rating: 4.8,
